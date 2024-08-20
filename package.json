@@ -1,0 +1,21 @@
+{
+  "name": "buddybreed-match",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ray da Silva & Israel Lázaro",
+  "license": "ISC",
+  "description": "Uma Aplicação para cruzamento de Pets",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.4.1",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
