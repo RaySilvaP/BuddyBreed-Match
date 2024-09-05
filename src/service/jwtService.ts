@@ -3,7 +3,7 @@ import "dotenv/config";
 
 const options = {
     expiresIn: process.env.TOKEN_EXPIRATION
-} as SignOptions
+} as SignOptions;
 
 const privateKey = process.env.PRIVATE_KEY as string;
 
