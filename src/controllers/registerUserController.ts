@@ -7,5 +7,5 @@ export class RegisterUserController{
         const registerUserCaseUse = new RegisterUserCaseUse();
         const user = await registerUserCaseUse.execute({userName, email, password});
         return response.status(201).json(user);
-        }
+    }
 }
