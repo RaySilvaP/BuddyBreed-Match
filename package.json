@@ -11,11 +11,15 @@
   "description": "Uma Aplicação para cruzamento de Pets",
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/mongoose": "^5.11.96",
     "@types/node": "^22.4.1",
     "typescript": "^5.5.4"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.1"
   }
 }
