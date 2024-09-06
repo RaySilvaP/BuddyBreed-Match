@@ -3,8 +3,8 @@ import upload from "../config/uploadConfig";
 
 const imageRouter = Router();
 
-imageRouter.post('/', upload.single('image'), (req: Request, res: Response) => {
-    console.log(req.file);
+imageRouter.post('/', upload.array('image', 5), (req: Request, res: Response) => {
+    console.log(req.files);
     res.sendStatus(200);
 });
 
