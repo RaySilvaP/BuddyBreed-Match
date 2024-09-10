@@ -24,3 +24,5 @@ TestResults.xml
 build
 node_modules
 .env
+uploads
+coverage
