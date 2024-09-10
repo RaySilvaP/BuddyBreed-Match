@@ -1,7 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
 import { verifyToken } from "./service/jwtService";
-import { Request, Response, NextFunction, Errback } from "express";
-import multer, { MulterError } from "multer";
+import { Request, Response, NextFunction } from "express";
+import { MulterError } from "multer";
 
 function authentication(req: Request, res: Response, next: NextFunction){
     const token = req.header('Authorization') as string;
@@ -14,13 +14,18 @@ function authentication(req: Request, res: Response, next: NextFunction){
     }
 }
 
-function uploadErrorHandler(err: Errback, req: Request, res: Response, next: NextFunction){
+function authorization(role: string){
+    return (req: Request, res: Response, next: NextFunction) => {
+        
+    }
+}
+
+function uploadErrorHandler(err: Error, req: Request, res: Response, next: NextFunction){
     if(err instanceof MulterError){
-        console.error(err.message)
         res.status(400).send(err.message);
     }
     else
         next(err)
 }
 
-export {authentication, uploadErrorHandler};
+export {authentication, authorization, uploadErrorHandler};
