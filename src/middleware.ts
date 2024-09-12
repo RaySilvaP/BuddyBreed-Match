@@ -16,7 +16,11 @@ function authentication(req: Request, res: Response, next: NextFunction){
 
 function authorization(role: string){
     return (req: Request, res: Response, next: NextFunction) => {
-        
+        const userRole = res.locals.user.role;
+        if(userRole == role || userRole == 'admin')
+            next();
+        else
+            res.sendStatus(401);
     }
 }
 
