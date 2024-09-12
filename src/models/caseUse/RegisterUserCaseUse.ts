@@ -9,8 +9,6 @@ export class RegisterUserCaseUse {
         user.role = "user";
         user.password = await bcrypt.hash(password, 10);
         await user.save();
-        console.log(user)
-        return user;
-           
-    }
-}
+        return user;           
+    };
+};

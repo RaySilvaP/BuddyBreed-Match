@@ -1,7 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { v4 as uuidv4 } from 'uuid'; 
-import Pets from "./pets";
-
+//import Pets from "./pets";
 interface Address {
     city: string; 
     state: string; 
@@ -9,7 +8,7 @@ interface Address {
     longitude: number;
   }
 interface UserType{
-    id: string;
+   // id: string;
     name?: string;
     userName: string;
     email: string;
@@ -20,11 +19,11 @@ interface UserType{
     role: string;
     createdAt: Date;
     updatedAt?: Date;
-    pets?:Pets[];
+    pets?: mongoose.Types.ObjectId[];
 };
 
 const schemaMongoUser = new Schema<UserType>({
-  id: { type: String, default: uuidv4, required: true },
+  //id: { type: String, default: uuidv4, required: true },
   name: { type: String },
   userName: { type: String, required: true },
   email: { type: String, required: true },
@@ -40,7 +39,7 @@ const schemaMongoUser = new Schema<UserType>({
   role: { type: String, required: true },
   createdAt: { type: Date, default: Date.now,required: true },
   updatedAt: { type: Date, default: Date.now,},
-  pets: [{ type: Schema.Types.ObjectId, ref: "Pets" }],
+  pets: { type: [Schema.Types.ObjectId], ref: "Pets", default: [] },
   });
 
   const User = mongoose.model<UserType>('Users',schemaMongoUser);
