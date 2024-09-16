@@ -3,7 +3,7 @@ import { verifyToken } from "./service/jwtService";
 import { Request, Response, NextFunction } from "express";
 import { MulterError } from "multer";
 
-function authentication(req: Request, res: Response, next: NextFunction){
+function authenticate(req: Request, res: Response, next: NextFunction){
     const token = req.header('Authorization') as string;
     try{
         const decoded = verifyToken(token) as JwtPayload;
@@ -14,13 +14,16 @@ function authentication(req: Request, res: Response, next: NextFunction){
     }
 }
 
-function authorization(role: string){
-    return (req: Request, res: Response, next: NextFunction) => {
-        const userRole = res.locals.user.role;
-        if(userRole == role || userRole == 'admin')
+const authorize = {
+    admin: (req: Request, res: Response, next: NextFunction) => {
+        const user = res.locals.user;
+        if(user.role == 'admin')
             next();
         else
             res.sendStatus(401);
+    },
+    petOwner: (req: Request, res: Response, next: NextFunction) => {
+        throw('not implemented');
     }
 }
 
@@ -32,4 +35,4 @@ function uploadErrorHandler(err: Error, req: Request, res: Response, next: NextF
         next(err)
 }
 
-export {authentication, authorization, uploadErrorHandler};
+export {authenticate, authorize, uploadErrorHandler};

@@ -6,7 +6,7 @@ interface Address {
     latitude: number;
     longitude: number;
   }
-export default interface User{
+interface User{
     id: string;
     name?: string;
     userName: string;
@@ -20,3 +20,5 @@ export default interface User{
     updatedAt?: Date;
     pets?:Pets[];
 };
+
+export default {findById: (id : any) => Promise.resolve({})};
