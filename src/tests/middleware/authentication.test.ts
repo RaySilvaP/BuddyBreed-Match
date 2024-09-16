@@ -2,18 +2,19 @@ import httpmocks from 'node-mocks-http';
 import { authenticate } from '../../middleware';
 import { generateToken } from '../../service/jwtService';
 
+const res = httpmocks.createResponse();
+const next = jest.fn();
+
 test('valid token', () => {
-    const token = generateToken('test', 'user');
+    const token = generateToken('id', 'user');
     const req = httpmocks.createRequest({
         headers: {authorization: token}
     });
-    const res = httpmocks.createResponse();
-    const next = jest.fn();
 
     authenticate(req, res, next);
 
     expect(next).toHaveBeenCalledWith();
-    expect(res.locals.user.username).toEqual('test');
+    expect(res.locals.user.id).toEqual('id');
 });
 
 test('invalid token', () => {
@@ -21,8 +22,6 @@ test('invalid token', () => {
     const req = httpmocks.createRequest({
         headers: {authorization: token}
     });
-    const res = httpmocks.createResponse();
-    const next = jest.fn();
 
     authenticate(req, res, next);
 
