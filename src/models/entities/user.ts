@@ -6,7 +6,7 @@ interface Address {
     state: string; 
     latitude: number;
     longitude: number;
-  }
+};
 interface UserType{
    // id: string;
     name?: string;

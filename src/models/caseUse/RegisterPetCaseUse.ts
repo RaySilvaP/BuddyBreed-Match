@@ -38,6 +38,7 @@ export class RegisterPetCaseUse {
             await user.save();
             return user;
         } catch (error: any) {
+            console.error('Erro ao cadastrar um novo pet:', error);
             throw new Error(`Erro ao adicionar o Pet: ${error.message}`);
         };      
     };
