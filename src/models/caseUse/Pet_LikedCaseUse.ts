@@ -1,6 +1,6 @@
 import PetsModel from '../entities/pets';
 import { RelationsPet, crossStatus } from '../entities/relations';
-import { VerifyLikesPets } from './VerifyLikesPetsCaseUse';
+import { VerifyLikesPets } from './Pet_VerifyLikesCaseUse';
 
 interface RelationPet {
     pet_id: string;
@@ -13,10 +13,10 @@ export class LikedPetCaseUse {
         const suitorPet = await PetsModel.findById(idPetSuitor);
         const myPet = await PetsModel.findById(idMyPet);
         if (!suitorPet || !myPet) {
-            throw new Error("Pet não encontrado");
+            throw new Error("Pet não encontrado no sistema!");
         };
-        const relationsSuitorPet = suitorPet?.relations || [];
-        const relationsMyPet = myPet?.relations || [];
+        const relationsSuitorPet = suitorPet.relations || [];
+        const relationsMyPet = myPet.relations || [];
         const verifyLike = new VerifyLikesPets();
         const likedMypet = await verifyLike.execute(relationsMyPet, idPetSuitor);
         const myPetliked = await verifyLike.execute(relationsSuitorPet, idMyPet);
@@ -30,7 +30,7 @@ export class LikedPetCaseUse {
                 return relationPet;
             } catch (error) {
                 console.error('Erro ao criar relação:', error);
-                throw new Error(`Não foi possível criar a relação para os pets ${idPetSuitor} e ${idMyPet}`);
+                throw new Error(`Falha ao criar relacionamento match para os pets ${idPetSuitor} e ${idMyPet}. Por favor, tente novamente mais tarde.`);
             };
         };
         if (myPetliked && !likedMypet) {
@@ -57,7 +57,7 @@ export class LikedPetCaseUse {
                 return { relationPet};
             } catch (error) {
                 console.error('Erro ao criar relacionamento match:', error);
-                throw new Error(`Erro ao criar relacionamento match para os pets ${idPetSuitor} e ${idMyPet}`);
+                throw new Error(`Falha ao criar relacionamento match para os pets ${idPetSuitor} e ${idMyPet}. Por favor, tente novamente mais tarde.`);
             };
         };
         throw new Error("Erro ao criar relacionamento like!");

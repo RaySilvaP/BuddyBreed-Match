@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { DeleteUserCaseUse } from "../models/caseUse/DeleteUserCaseUse"
+import { DeleteUserCaseUse } from "../models/caseUse/User_DeleteCaseUse"
 
 export class DeleteuserController{    
     async handle(req: Request, res: Response):Promise<Response>{

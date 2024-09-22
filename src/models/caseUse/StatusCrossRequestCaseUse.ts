@@ -21,7 +21,7 @@ export class StatusCrossRequestCaseUse {
             return relation.crossRequest || "Status não disponível";
         } catch (error:any) {
                 console.error("Erro ao buscar status de solicitação de cruzamento:", error.message);
-                throw new Error(`Erro ao buscar status de solicitação de cruzamento: ${error.message}`);
+                throw new Error(`Falha ao buscar status de solicitação de cruzamento: ${error.message}. Por favor, tente novamente mais tarde.`);
         };
     };
 };

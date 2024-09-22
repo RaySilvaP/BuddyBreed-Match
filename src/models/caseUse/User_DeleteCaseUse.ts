@@ -1,5 +1,4 @@
 import User from "../entities/user";
-
 export class DeleteUserCaseUse {    
     async execute(id: string): Promise<void> {
         const user = await User.findById(id);
@@ -9,7 +8,8 @@ export class DeleteUserCaseUse {
         try {
             await user.deleteOne();
         } catch (error) {
-            throw new Error('Erro ao deletar usuário!');            
+            console.error("Erro ao deletar usuário:", error);
+            throw new Error('Falha ao deletar o usuário. Por favor, tente novamente mais tarde.');            
         };     
     };
 };

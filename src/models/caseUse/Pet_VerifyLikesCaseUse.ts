@@ -17,8 +17,8 @@ export class VerifyLikesPets {
                 };
             };
         } catch (error) {
-            console.error('Erro ao verificar likes de pets:', error);
-            throw new Error("Erro ao verificar likes de pets");
+            console.error('Erro ao verificar os likes do pets:', error);
+            throw new Error("Falha ao verificar likes de pets. Por favor, tente novamente mais tarde.");
         };
         return isLiked;
     };

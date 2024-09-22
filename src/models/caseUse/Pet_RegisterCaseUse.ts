@@ -24,7 +24,7 @@ export class RegisterPetCaseUse {
             };
             const user = await User.findById(userId);
             if (!user) {
-                throw new Error("Usuário não encontrado");
+                throw new Error("Usuário não encontrado no sistema!");
             };
             if (!user.pets) {
                 user.pets = [];
@@ -39,7 +39,7 @@ export class RegisterPetCaseUse {
             return user;
         } catch (error: any) {
             console.error('Erro ao cadastrar um novo pet:', error);
-            throw new Error(`Erro ao adicionar o Pet: ${error.message}`);
+            throw new Error(`Falha ao adicionar o Pet: ${error.message}. Por favor, tente novamente mais tarde.`);
         };      
     };
 };

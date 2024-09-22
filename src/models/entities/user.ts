@@ -36,7 +36,7 @@ const schemaMongoUser = new Schema<UserType>({
     latitude: { type: Number },
     longitude: { type: Number },
   },
-  role: { type: String, required: true },
+  role: { type: String, required: true, default:"User" },
   createdAt: { type: Date, default: Date.now,required: true },
   updatedAt: { type: Date, default: Date.now,},
   pets: { type: [Schema.Types.ObjectId], ref: "Pets", default: [] },

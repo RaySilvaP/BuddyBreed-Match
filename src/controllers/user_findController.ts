@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { FindUserCaseUse } from "../models/caseUse/FindUserCaseUse";
+import { FindUserCaseUse } from "../models/caseUse/User_FindCaseUse";
 
 export class FindUserController{
     async handle(req: Request, res: Response){

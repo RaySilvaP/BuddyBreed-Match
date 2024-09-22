@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { LikedPetCaseUse } from "../models/caseUse/LikedPetCaseUse";
+import { LikedPetCaseUse } from "../models/caseUse/Pet_LikedCaseUse";
 
 export class LikedPetController{
     async handle(req: Request, res: Response){

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { LikedPetController } from "../controllers/likedPetController";
+import { LikedPetController } from "../controllers/pet_likedController";
 import { StatusCrossRequestController } from "../controllers/statusCrossRequestController";
-import { CrossRequestController } from "../controllers/CrossRquestController";
+import { CrossRequestController } from "../controllers/crossRquestController";
 
 
 
