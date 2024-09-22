@@ -1,45 +1,44 @@
 import PetsModel from "../entities/pets";
-import User from "../entities/user";
-import { Types } from "mongoose";
-
-interface PetAdd {
-    name: string;
-    age: number;
-    species: string;
-    breed: string;
-    weight?: number;
-    size?: number;
-    photos?: string[];
-};
-
-interface UserPet {
-    pets: PetAdd[];
-};
-
-export class RegisterPetCaseUse {
-    async execute(userId: string, addPet: UserPet) {
+import { PetType } from "../entities/pets";
+export class UpdatePetCaseUse {
+    async execute(id: string, petData: PetType) {
         try {
-            if (!Types.ObjectId.isValid(userId)) {
-                throw new Error("Id inválido");
+            const pet = await PetsModel.findById(id);
+            if (!pet) {
+                throw new Error("Pet não encontrado no sistema!");
+            }
+            for (const [key, value] of Object.entries(petData)) {
+                switch (key) {
+                    case 'name':
+                        pet.name = value;
+                        break;
+                    case 'age':
+                        pet.age = value;
+                        break;
+                    case 'species':
+                        pet.specie = value;
+                        break;
+                    case 'breed':
+                        pet.breed = value;
+                        break;
+                    case 'weight':
+                        pet.weight = value;
+                        break;
+                    case 'size':
+                        pet.size = value;
+                        break;
+                }
+            }
+            await pet.save();     
+            const updatedPet = {
+                name: pet.name,
+                age: pet.age,
+                species: pet?.specie,
             };
-            const user = await User.findById(userId);
-            if (!user) {
-                throw new Error("Usuário não encontrado no sistema!");
-            };
-            if (!user.pets) {
-                user.pets = [];
-            };
-            const petsToSave = await Promise.all(
-                
-                addPet.pets.map(petData => new PetsModel(petData).save())
-            );
-            const petIds = petsToSave.map(pet => pet._id as Types.ObjectId);
-            user.pets = [...user.pets, ...petIds];
-            await user.save();
-            return user;
-        } catch (error: any) {
-            console.error('Erro ao cadastrar um novo pet:', error);
-            throw new Error(`Falha ao adicionar o Pet: ${error.message}. Por favor, tente novamente mais tarde.`);
-        };      
-    };
-};
+            return updatedPet;
+        } catch (error) {
+            console.error("Erro ao atualizar o pet:", error);
+            throw new Error("Falha ao atualizar o Pet. Por favor, tente novamente mais tarde.");
+        }
+    }
+}

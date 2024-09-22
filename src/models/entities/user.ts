@@ -1,14 +1,10 @@
 import mongoose, { Schema } from "mongoose";
-import { v4 as uuidv4 } from 'uuid'; 
-//import Pets from "./pets";
+
 interface Address {
     city: string; 
     state: string; 
-    latitude: number;
-    longitude: number;
 };
 interface UserType{
-   // id: string;
     name?: string;
     userName: string;
     email: string;
@@ -16,14 +12,18 @@ interface UserType{
     cpf?: string;
     phone?: string;
     address?: Address;
+    location: {
+      type: 'Point',
+      coordinates: [number, number]
+    };
+    profilePicture?: string;
     role: string;
     createdAt: Date;
     updatedAt?: Date;
-    pets?: mongoose.Types.ObjectId[];
+    pets: mongoose.Types.ObjectId[];
 };
 
-const schemaMongoUser = new Schema<UserType>({
-  //id: { type: String, default: uuidv4, required: true },
+const userSchema = new Schema<UserType>({
   name: { type: String },
   userName: { type: String, required: true },
   email: { type: String, required: true },
@@ -33,14 +33,19 @@ const schemaMongoUser = new Schema<UserType>({
   address: {
     city: { type: String },
     state: { type: String },
-    latitude: { type: Number },
-    longitude: { type: Number },
   },
-  role: { type: String, required: true, default:"User" },
+  location: {
+    type: {type: String, required: true, enum: ['Point']},
+    coordinates: {type: [Number], required: true}
+  },
+  profilePicture: {type: String},
+  role: { type: String, required: true },
   createdAt: { type: Date, default: Date.now,required: true },
   updatedAt: { type: Date, default: Date.now,},
   pets: { type: [Schema.Types.ObjectId], ref: "Pets", default: [] },
   });
 
-  const User = mongoose.model<UserType>('Users',schemaMongoUser);
+  userSchema.index({location: '2dsphere'});
+
+  const User = mongoose.model<UserType>('Users', userSchema);
   export default User;

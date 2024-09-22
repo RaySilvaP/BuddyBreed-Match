@@ -1,10 +1,8 @@
-import  express  from "express";
+import express from "express";
 import cors from 'cors';
-import dotenv from 'dotenv';
+import'dotenv/config';
 import "./dataBase/dataBaseMongoDB"
 import { routes } from "./routers/index.routes";
-
-dotenv.config();
 
 const port = process.env.PORT;
 const api = express();

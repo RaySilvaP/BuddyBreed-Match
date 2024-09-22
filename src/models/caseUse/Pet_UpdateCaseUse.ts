@@ -3,7 +3,7 @@ import PetsModel from "../entities/pets";
 interface updatePet {
     name?: string;
     age?: number;
-    species?: string; 
+    specie?: string; 
     breed?: string;
     weight?: number;
     size?: number;
@@ -26,7 +26,7 @@ export class UpdatePetCaseUse {
                         pet.age = value;
                         break;
                     case 'species':
-                        pet.species = value;
+                        pet.specie = value;
                         break;
                     case 'breed':
                         pet.breed = value;
@@ -44,7 +44,7 @@ export class UpdatePetCaseUse {
             const updatedPet = {
                 name: pet.name,
                 age: pet.age,
-                species: pet?.species,
+                species: pet?.specie,
             };
 
             return updatedPet;
