@@ -10,7 +10,7 @@ export default class FindSimilarPetsCaseUse{
         const pets = await User.aggregate([
             {
                 $geoNear: {
-                    near: user.location,
+                    near: user.address.location,
                     distanceField: 'distance'
                 }
             },

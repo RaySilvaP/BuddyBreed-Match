@@ -3,6 +3,10 @@ import mongoose, { Schema } from "mongoose";
 interface Address {
     city: string; 
     state: string; 
+    location: {
+      type: 'Point',
+      coordinates: [number, number]
+    };
 };
 interface UserType{
     name?: string;
@@ -11,11 +15,7 @@ interface UserType{
     password: string;
     cpf?: string;
     phone?: string;
-    address?: Address;
-    location: {
-      type: 'Point',
-      coordinates: [number, number]
-    };
+    address: Address;
     profilePicture?: string;
     role: string;
     createdAt: Date;
@@ -33,10 +33,10 @@ const userSchema = new Schema<UserType>({
   address: {
     city: { type: String },
     state: { type: String },
-  },
-  location: {
-    type: {type: String, required: true, enum: ['Point']},
-    coordinates: {type: [Number], required: true}
+    location: {
+      type: {type: String, required: true, enum: ['Point']},
+      coordinates: {type: [Number], required: true}
+    },
   },
   profilePicture: {type: String},
   role: { type: String, required: true },
