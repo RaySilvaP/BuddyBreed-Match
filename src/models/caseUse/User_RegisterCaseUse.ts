@@ -2,12 +2,15 @@ import User from "../entities/user";
 import bcrypt from 'bcrypt';
 
 export class RegisterUserCaseUse {
-    async execute({ userName, email, password }: { userName: string; email: string; password: string }) {
+    async execute(userName: string, email: string, password: string, location: object) {
         try {
-            const user = new User();
-            user.userName = userName;        
-            user.email = email;
-            user.password = await bcrypt.hash(password, 10);
+            const user = new User({
+                userName,
+                email,
+                role: 'user',
+                password: await bcrypt.hash(password, 10),
+                location
+            });
             await user.save();
 
             return user;
