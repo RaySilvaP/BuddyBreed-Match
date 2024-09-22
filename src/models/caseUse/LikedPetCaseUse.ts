@@ -1,4 +1,4 @@
-import PetsModel from '../entities/pets';
+import Pet from '../entities/pet';
 import { RelationsPet, crossStatus } from '../entities/relations';
 import { VerifyLikesPets } from './VerifyLikesPetsCaseUse';
 
@@ -10,8 +10,8 @@ export class LikedPetCaseUse {
     async execute(relationData: RelationPet): Promise<object> {
         const idPetSuitor = relationData.pet_id;
         const idMyPet = relationData.myPet_id;
-        const suitorPet = await PetsModel.findById(idPetSuitor);
-        const myPet = await PetsModel.findById(idMyPet);
+        const suitorPet = await Pet.findById(idPetSuitor);
+        const myPet = await Pet.findById(idMyPet);
         if (!suitorPet || !myPet) {
             throw new Error("Pet não encontrado");
         };

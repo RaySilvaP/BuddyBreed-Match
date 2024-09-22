@@ -1,4 +1,4 @@
-import PetsModel from "../entities/pets";
+import PetsModel from "../entities/pet";
 
 export class FindOnePetCaseUse{
     async execute(id:string){
