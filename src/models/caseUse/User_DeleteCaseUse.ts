@@ -1,4 +1,5 @@
 import User from "../entities/user";
+
 export class DeleteUserCaseUse {    
     async execute(id: string): Promise<void> {
         const user = await User.findById(id);

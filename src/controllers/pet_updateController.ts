@@ -6,12 +6,7 @@ export class UpdatePetController{
         const { id } = req.params;
         const updatePetData = req.body;
         const updateCaseUse = new UpdatePetCaseUse();
-        try {
-            const petUpdate = await updateCaseUse.execute(id, updatePetData);
-            return res.status(200).json(petUpdate);
-        } catch (error:any) {
-            
-            return res.status(400).json({ message: error.message });
-        }
-    }
-}
+        const petUpdate = await updateCaseUse.execute(id, updatePetData);
+        return res.status(200).json(petUpdate);
+    };
+};

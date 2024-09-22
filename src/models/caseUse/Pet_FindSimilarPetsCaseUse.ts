@@ -4,9 +4,11 @@ import User from "../entities/user";
 export default class FindSimilarPetsCaseUse{
     async execute(userId: string, pet: PetType): Promise<PetType[]>{
         const user = await User.findById(userId);
+       
         if(!user)
             throw('Owner not found;')
-
+        if(!user.address)  
+            throw('Owner not found;')     
         const pets = await User.aggregate([
             {
                 $geoNear: {
@@ -58,5 +60,5 @@ export default class FindSimilarPetsCaseUse{
             }
         ]);
         return pets;
-    }
-}
+    };
+};

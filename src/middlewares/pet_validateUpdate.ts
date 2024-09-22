@@ -10,13 +10,10 @@ const validateUpdatePetData = (req: Request, res: Response, next: NextFunction) 
         weight: Joi.number().min(0).optional(),
         size: Joi.number().min(0).optional(),
     });
-
     const { error } = petSchema.validate(req.body);
-
     if (error) {
         return res.status(400).json({ message: error.details[0].message });
-    }
-
+    };
     next();
 };
 

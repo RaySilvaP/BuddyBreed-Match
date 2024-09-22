@@ -1,4 +1,5 @@
 import { RelationsPet, crossStatus } from "../entities/relations";
+
 export class CrossRequesCaseUse {
     async execute(idRelation: string, statusCross: string, petId: string) {
         try {

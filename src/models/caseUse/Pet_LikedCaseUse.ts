@@ -6,6 +6,7 @@ interface RelationPet {
     pet_id: string;
     myPet_id: string;
 };
+
 export class LikedPetCaseUse {
     async execute(relationData: RelationPet): Promise<object> {
         const idPetSuitor = relationData.pet_id;

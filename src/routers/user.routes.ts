@@ -8,8 +8,7 @@ import validateUpdateUser from "../middlewares/user_validateUpdate";
 import verifyExistsIdUser from "../middlewares/user_verifyExistsId";
 import VerifyUniqueData from "../middlewares/user_VerifyUniqueData";
 import { authenticate } from "../middlewares/token_verify";
-import { LoginController } from "../service/loginController";
-
+import { LoginController } from "../controllers/user_loginController";
 
 const routerUser = Router();
 
@@ -24,6 +23,5 @@ routerUser.post('/user',VerifyUniqueData, validateRegisterUser,registerUserContr
 routerUser.delete('/user/:id',authenticate,  verifyExistsIdUser,deleteUserController.handle);
 routerUser.put('/user/:id', authenticate, verifyExistsIdUser,  validateUpdateUser, updateUserController.handle);
 routerUser.get('/user', findUserController.handle);
-
 
 export { routerUser };

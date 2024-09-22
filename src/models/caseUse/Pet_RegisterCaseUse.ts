@@ -1,19 +1,10 @@
 import PetsModel from "../entities/pets";
+import { PetType } from "../entities/pets";
 import User from "../entities/user";
 import { Types } from "mongoose";
 
-interface PetAdd {
-    name: string;
-    age: number;
-    species: string;
-    breed: string;
-    weight?: number;
-    size?: number;
-    photos?: string[];
-};
-
 interface UserPet {
-    pets: PetAdd[];
+    pets: PetType[];
 };
 
 export class RegisterPetCaseUse {

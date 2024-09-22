@@ -20,6 +20,7 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+
 .env
 .env.local
 .env.development
@@ -27,3 +28,4 @@ build
 node_modules
 coverage/
 uploads/
+test/

@@ -2,6 +2,14 @@ import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
 
 const validateUpdateUser = async (req: Request, res: Response, next: NextFunction) => {
+    const addressSchema = Joi.object({
+        city: Joi.string().required(),
+        state: Joi.string().required(),
+        location: Joi.object({
+            type: Joi.string().valid('Point').required(),
+            coordinates: Joi.array().items(Joi.number()).length(2).required()
+        }).required()
+    });
     const schema = Joi.object({
         name: Joi.string().optional(),
         userName: Joi.string().min(3).max(30).optional(),
@@ -15,16 +23,9 @@ const validateUpdateUser = async (req: Request, res: Response, next: NextFunctio
             .length(15)
             .pattern(/^\(\d{2}\) \d{5}-\d{4}$/) 
             .optional(),
-        address: Joi.object({
-            city: Joi.string().optional(),
-            state: Joi.string().optional(),
-            latitude: Joi.number().optional(),
-            longitude: Joi.number().optional(),
-        }).optional(),
+        address: addressSchema.optional(),
     });
-
     const { error } = schema.validate(req.body);
-
     if (error) {
         return res.status(400).json({ message: error.details[0].message });
     };

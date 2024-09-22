@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-interface Address {
+export interface Address {
     city: string; 
     state: string; 
     location: {
@@ -8,7 +8,7 @@ interface Address {
       coordinates: [number, number]
     };
 };
-interface UserType{
+export interface UserType{
     name?: string;
     userName: string;
     email: string;
@@ -20,7 +20,7 @@ interface UserType{
     role: string;
     createdAt: Date;
     updatedAt?: Date;
-    pets: mongoose.Types.ObjectId[];
+    pets?: mongoose.Types.ObjectId[];
 };
 
 const userSchema = new Schema<UserType>({
@@ -39,7 +39,7 @@ const userSchema = new Schema<UserType>({
     },
   },
   profilePicture: {type: String},
-  role: { type: String, required: true },
+  role: { type: String, required: true, default:"User" },
   createdAt: { type: Date, default: Date.now,required: true },
   updatedAt: { type: Date, default: Date.now,},
   pets: { type: [Schema.Types.ObjectId], ref: "Pets", default: [] },

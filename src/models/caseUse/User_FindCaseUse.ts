@@ -8,6 +8,6 @@ export class FindUserCaseUse {
         } catch (error) {
             console.error("Erro ao localizar usuário:", error);
             throw new Error("Falha ao encontrar o usuário. Por favor, tente novamente mais tarde.");
-        }
+        };
     };
-}
+};

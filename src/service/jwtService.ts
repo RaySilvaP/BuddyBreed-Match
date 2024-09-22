@@ -9,10 +9,10 @@ const privateKey = process.env.PRIVATE_KEY as string;
 
 function generateToken(username : string, role : string){
     return sign({user: {username, role}}, privateKey, options);
-}
+};
 
 function verifyToken(token : string){
     return verify(token, privateKey);
-}
+};
 
 export {generateToken, verifyToken};

@@ -1,32 +1,14 @@
 import User from "../entities/user";
+import { UserType } from "../entities/user";
 import bcrypt from 'bcrypt';
 
-interface Address {
-    city: string; 
-    state: string; 
-    latitude: number;
-    longitude: number;
-}
-
-interface UpdateUser {
-    name?: string;
-    userName?: string;
-    email?: string;
-    password?: string;
-    address?: Address;
-    updatedAt?: Date;
-    cpf?: string;
-    phone?: string;
-}
-
 export class UpdateUserCaseUse {
-    async execute(id: string, updateData: UpdateUser) {
+    async execute(id: string, updateData: UserType) {
         try {
             const user = await User.findById(id);
-            
             if (!user) {
                 throw new Error('Usuário não encontrado');
-            }
+            };
 
             for (const [key, value] of Object.entries(updateData)) {
                 switch (key) {
@@ -49,11 +31,13 @@ export class UpdateUserCaseUse {
                         user.phone = value;
                         break;
                     case 'address':
-                        user.address = value;
+                        if (updateData.address){
+                            user.address = updateData.address;
+                        }
+                        user.address=user.address;
                         break;
-                }
-            }
-
+                };
+            };
             user.updatedAt = new Date();
             await user.save();
 
@@ -68,6 +52,6 @@ export class UpdateUserCaseUse {
         } catch (error) {
             console.error("Erro ao atualizar usuário:", error);
             throw new Error("Falha ao atualizar o usuário. Por favor, tente novamente mais tarde.");
-        }
-    }                    
-}
+        };
+    };
+};
