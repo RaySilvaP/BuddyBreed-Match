@@ -21,6 +21,9 @@ rad.json
 #Test results file
 TestResults.xml
 
+.env
+.env.local
+.env.development
 build
 node_modules
 .env

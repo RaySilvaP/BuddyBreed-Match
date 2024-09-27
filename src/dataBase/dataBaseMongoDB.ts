@@ -7,8 +7,8 @@ async function main() {
           console.log("Conectado com sucesso!!");
     } catch (err) {
         console.error("Erro ao conectar ao MongoDB:", err);
-    }
-}
+    };
+};
 
 main();
 
