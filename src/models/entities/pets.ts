@@ -5,6 +5,7 @@ export interface PetType extends Document {
     age: number;
     specie: string; 
     breed: string;
+    sex: string;
     weight?: number;
     size?: number;
     photos?: string[];
@@ -15,6 +16,7 @@ const petSchema = new Schema<PetType>({
     age: { type: Number, required: true },
     specie: { type: String, required: true },
     breed: { type: String, required: true },
+    sex: {type: String, required: true, enum:['Male', 'Female']},
     weight: { type: Number },
     size: { type: Number },
     photos: [{ type: String }],

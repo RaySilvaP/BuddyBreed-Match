@@ -5,7 +5,12 @@ export class LikedPetController{
     async handle(req: Request, res: Response){
         const idPetData = req.body;
         const likedPetCaseUse = new LikedPetCaseUse();
-        const result = await likedPetCaseUse.execute(idPetData);
-        return res.status(201).json(result);  
+        try{
+            const result = await likedPetCaseUse.execute(idPetData);
+            return res.status(201).json(result);
+        }
+        catch(err){
+            res.status(500).send(err);
+        }
     };
 };

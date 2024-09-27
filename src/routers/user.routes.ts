@@ -9,6 +9,8 @@ import verifyExistsIdUser from "../middlewares/user_verifyExistsId";
 import VerifyUniqueData from "../middlewares/user_VerifyUniqueData";
 import { authenticate } from "../middlewares/token_verify";
 import { LoginController } from "../controllers/user_loginController";
+import upload from '../config/uploadConfig';
+import ChangeProfilePictureController from "../controllers/user_changeProfilePictureController";
 
 const routerUser = Router();
 
@@ -17,11 +19,13 @@ const deleteUserController = new DeleteuserController();
 const updateUserController = new UpdateUserController();
 const findUserController = new FindUserController();
 const loginController = new LoginController();
+const changeProfilePictureController = new ChangeProfilePictureController();
 
 routerUser.post('/login', loginController.handle);
-routerUser.post('/user',VerifyUniqueData, validateRegisterUser,registerUserController.handle);
-routerUser.delete('/user/:id',authenticate,  verifyExistsIdUser,deleteUserController.handle);
-routerUser.put('/user/:id', authenticate, verifyExistsIdUser,  validateUpdateUser, updateUserController.handle);
+routerUser.post('/user', VerifyUniqueData, validateRegisterUser, registerUserController.handle);
+routerUser.put('/user/picture', authenticate, upload.single('picture'), changeProfilePictureController.handle)
+routerUser.delete('/user',authenticate,  verifyExistsIdUser, deleteUserController.handle);
+routerUser.put('/user', authenticate, verifyExistsIdUser,  validateUpdateUser, updateUserController.handle);
 routerUser.get('/user', findUserController.handle);
 
 export { routerUser };

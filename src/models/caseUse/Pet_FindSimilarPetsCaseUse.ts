@@ -7,8 +7,7 @@ export default class FindSimilarPetsCaseUse{
        
         if(!user)
             throw('Owner not found;')
-        if(!user.address)  
-            throw('Owner not found;')     
+             
         const pets = await User.aggregate([
             {
                 $geoNear: {
@@ -26,7 +25,7 @@ export default class FindSimilarPetsCaseUse{
                     foreignField: '_id',
                     pipeline: [
                         {
-                            $match: {specie: pet.specie}
+                            $match: {specie: pet.specie, sex: {$ne: pet.sex}}
                         }
                     ],
                     as: 'petObjects'
@@ -48,12 +47,11 @@ export default class FindSimilarPetsCaseUse{
                     userName: 1,
                     profilePicture: 1,
                     distance: 1,
-                    pet: '$petObjects'
+                    pet: '$petObjects',
                 }
             },
             {
                 $project: {
-                    'pet.owner': 0,
                     'pet.relations': 0,
 
                 }

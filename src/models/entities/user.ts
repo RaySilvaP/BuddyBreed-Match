@@ -45,7 +45,7 @@ const userSchema = new Schema<UserType>({
   pets: { type: [Schema.Types.ObjectId], ref: "Pets", default: [] },
   });
 
-  userSchema.index({location: '2dsphere'});
+  userSchema.index({'address.location': '2dsphere'});
 
   const User = mongoose.model<UserType>('Users', userSchema);
   export default User;

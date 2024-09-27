@@ -6,7 +6,12 @@ export class FindSimilarPetsController{
         const pet = req.body;
         const {id} = res.locals.user;
         const caseUse = new FindSimilarPetsCaseUse();       
-        const pets = await caseUse.execute(id, pet);
-        res.status(200).json(pets);
+        try{
+            const pets = await caseUse.execute(id, pet);
+            res.status(200).json(pets);
+        }
+        catch(err){
+            res.status(500).send(err);
+        }
     };
 };

@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 
 export class RegisterUserCaseUse {
     async execute(userData:UserType) { 
-              
         try {
             const user = new User({
                 userName: userData.userName,

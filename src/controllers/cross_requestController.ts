@@ -6,7 +6,12 @@ export class CrossRequestController{
         const { id } = req.params;
         const {statusCross, petId} = req.body;
         const crossRequestCaseUse = new CrossRequesCaseUse();
-        const result = await crossRequestCaseUse.execute(id, statusCross, petId);
-        return res.status(201).json(result);
+        try{
+            const result = await crossRequestCaseUse.execute(id, statusCross, petId);
+            return res.status(201).json(result);
+        }
+        catch(err){
+            res.status(500).send(err);
+        }
     };
 };

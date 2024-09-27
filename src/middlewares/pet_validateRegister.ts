@@ -9,9 +9,9 @@ const validateRegisterPet = (req: Request, res: Response, next: NextFunction) =>
                 age: Joi.number().min(0).required(),
                 specie: Joi.string().required(),
                 breed: Joi.string().required(),
+                sex: Joi.string().valid('Male', 'Female').required(),
                 weight: Joi.number().optional(),
-                size: Joi.number().optional(),
-                photos: Joi.array().items(Joi.string()).optional(),
+                size: Joi.number().optional()
             })
         ).required(),
     });
