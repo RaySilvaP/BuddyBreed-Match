@@ -9,7 +9,7 @@ const port = process.env.PORT;
 const api = express();
 
 api.use(express.json());
-api.use(cors());
+api.use(cors({ origin: '*' }));
 api.use(routes);
 
 api.use(uploadErrorHandler);

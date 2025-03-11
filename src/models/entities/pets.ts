@@ -10,6 +10,7 @@ export interface PetType extends Document {
     size?: number;
     photos?: string[];
     relations?: mongoose.Types.ObjectId[];
+    vaccines?: string[];
 };
 const petSchema = new Schema<PetType>({
     name: { type: String, required: true },
@@ -20,7 +21,8 @@ const petSchema = new Schema<PetType>({
     weight: { type: Number },
     size: { type: Number },
     photos: [{ type: String }],
-    relations: [{ type: Schema.Types.ObjectId, ref: 'Relations' }]    
+    relations: [{ type: Schema.Types.ObjectId, ref: 'Relations' }],
+    vaccines: [{ type: String }]    
 });
 
 const PetsModel = mongoose.model<PetType>('Pets', petSchema);

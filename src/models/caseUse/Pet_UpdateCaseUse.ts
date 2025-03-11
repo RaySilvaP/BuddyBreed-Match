@@ -28,6 +28,9 @@ export class UpdatePetCaseUse {
                     case 'size':
                         pet.size = value;
                         break;
+                    case 'sex': 
+                        pet.sex = value;
+                        break;
                 };
             };
             await pet.save();     
