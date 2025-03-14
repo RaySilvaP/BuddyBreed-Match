@@ -1,3 +1,7 @@
+# Como Rodar:
+1. `$ docker run -p 27017:27017 mongo`
+2. `$ npm start`
+
 # Environment Variables (exemplo):
 
 - DB_MONGO_URI='mongodb://127.0.0.1:27017/test'
