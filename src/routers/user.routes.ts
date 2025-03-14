@@ -3,6 +3,7 @@ import { RegisterUserController } from "../controllers/user_registerController";
 import { DeleteuserController } from "../controllers/user_deleteController";
 import { UpdateUserController } from "../controllers/user_updateController";
 import { FindUserController } from "../controllers/user_findController";
+import { FindUserByIdController } from "../controllers/user_findIDController"; // Importando o novo controlador
 import validateRegisterUser from "../middlewares/user_validateRegister";
 import validateUpdateUser from "../middlewares/user_validateUpdate";
 import verifyExistsIdUser from "../middlewares/user_verifyExistsId";
@@ -18,14 +19,19 @@ const registerUserController = new RegisterUserController();
 const deleteUserController = new DeleteuserController();
 const updateUserController = new UpdateUserController();
 const findUserController = new FindUserController();
+const findUserByIdController = new FindUserByIdController(); // Instanciando o novo controlador
 const loginController = new LoginController();
 const changeProfilePictureController = new ChangeProfilePictureController();
 
+// Rotas existentes
 routerUser.post('/login', loginController.handle);
 routerUser.post('/user', VerifyUniqueData, validateRegisterUser, registerUserController.handle);
-routerUser.put('/user/picture', authenticate, upload.single('picture'), changeProfilePictureController.handle)
-routerUser.delete('/user',authenticate,  verifyExistsIdUser, deleteUserController.handle);
-routerUser.put('/user', authenticate, verifyExistsIdUser,  validateUpdateUser, updateUserController.handle);
+routerUser.put('/user/picture', authenticate, upload.single('picture'), changeProfilePictureController.handle);
+routerUser.delete('/user', authenticate, verifyExistsIdUser, deleteUserController.handle);
+routerUser.put('/user', authenticate, verifyExistsIdUser, validateUpdateUser, updateUserController.handle);
 routerUser.get('/user', findUserController.handle);
+
+// Nova rota para buscar usuário por ID
+routerUser.get('/user/:id', findUserByIdController.handle); // Adicionando a nova rota
 
 export { routerUser };
