@@ -1,15 +1,15 @@
 import httpmocks from 'node-mocks-http';
-import DeleteUserController from '../../controllers/deleteUserController'
-import DeleteUserCaseUse from '../../models/caseUser/DeleteUserCaseUse';
+import { DeleteuserController } from '../../controllers/user_deleteController';
+import { DeleteUserCaseUse } from '../../models/caseUse/User_DeleteCaseUse';
 jest.mock('../../models/caseUser/DeleteUserCaseUse', () => {
     return {
-      DeleteUserCaseUse: jest.fn().mockImplementation(() => {
-        return {
-          execute: () => {},
-        };
-      })
+        DeleteUserCaseUse: jest.fn().mockImplementation(() => {
+            return {
+                execute: () => { },
+            };
+        })
     };
-  });
+});
 
 const mockedDeleteUserCaseUse = jest.mocked(DeleteUserCaseUse);
 
@@ -19,13 +19,13 @@ beforeEach(() => {
 
 test('Delete user', () => {
     const req = httpmocks.createRequest({
-        params: {id: 1}
+        params: { id: 1 }
     });
     const res = httpmocks.createResponse({
-        locals: {user: {id: 1}}
+        locals: { user: { id: 1 } }
     });
-    const deleteUser = new DeleteUserController();
-    
+    const deleteUser = new DeleteuserController();
+
     deleteUser.handle(req, res);
 
     expect(res.statusCode).toEqual(200);

@@ -1,6 +1,6 @@
 import httpmocks from 'node-mocks-http'
-import { uploadErrorHandler } from '../../middleware'
 import { MulterError } from 'multer';
+import uploadErrorHandler from '../../middlewares/uploadErrorHandler';
 
 describe('Upload error handler', () => {
     const req = httpmocks.createRequest();

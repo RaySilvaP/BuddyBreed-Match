@@ -1,6 +1,6 @@
 import httpmocks from 'node-mocks-http';
-import { authenticate } from '../../middleware';
 import { generateToken } from '../../service/jwtService';
+import { authenticate } from '../../middlewares/token_verify';
 
 const res = httpmocks.createResponse();
 const next = jest.fn();
