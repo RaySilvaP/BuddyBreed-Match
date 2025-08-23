@@ -16,6 +16,8 @@ export default class LoginCaseUse{
         return {
             token,
             user: {
+                id: user.id,
+                userName: user.userName,
                 email: user.email,
                 role: user.role,
             },
