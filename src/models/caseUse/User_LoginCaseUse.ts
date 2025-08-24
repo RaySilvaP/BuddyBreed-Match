@@ -20,6 +20,7 @@ export default class LoginCaseUse{
                 userName: user.userName,
                 email: user.email,
                 role: user.role,
+                profilePicture: user.profilePicture,
             },
         };
     }
